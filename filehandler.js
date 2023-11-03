@@ -40,7 +40,7 @@ export default class FileHandler {
     return this.txtFileHighScore;
   }
 
-  getHighScoresFromFile() {
+  getHighScoresFromFile(bOverWrite) {
 
     let savedPlayers = [];
 
@@ -53,14 +53,18 @@ export default class FileHandler {
     savedPlayers = savedPlayers.trim();
     savedPlayers = savedPlayers.split('\r\n');
 
+    // Check if we want to empty the list,
+    // before reading data from the file.
+    if (bOverWrite) {
+      this.players = [];
+    }
+
     for (let player of savedPlayers) {
       player = player.split(',');
       let txtName = player[0];
       let iScore = parseInt(player[1]);
       this.players.push(new Player(txtName, iScore));
     }
-
-    console.log(this.players);
 
     return this.players;
 
