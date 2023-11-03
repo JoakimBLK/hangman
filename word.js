@@ -18,7 +18,7 @@ export default class Word {
     this.txtWord = txtWord;
   }
 
-  getName() {
+  getWord() {
     return this.txtWord;
   }
 
