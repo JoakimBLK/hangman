@@ -3,6 +3,9 @@ import SecretWord from "./secretword.js";
 import GuessedWord from "./guessedword.js";
 import Gallows from "./gallows.js";
 import Question from "./question.js";
+import Word from "./word.js";
+import Player from "./player.js";
+
 
 import PromptSync from 'prompt-sync';
 
@@ -19,6 +22,8 @@ export default class Game {
   question;
   turnNbr;
   score;
+  word;
+  player;
 
   constructor() {
 
@@ -31,9 +36,12 @@ export default class Game {
     this.score = 0;
     this.turnNbr = 0;
     print("Welcome to hangman!");
+    let nameQuestion = new Question("What is your name: ");
+    this.player = new Player(nameQuestion.answer);
     this.gallows = new Gallows();
     this.question = new Question("Type in the secret word: ");
     this.secretWord = new SecretWord(this.question.answer);
+    this.word = new Word(this.question.answer);
     this.guessedWord = new GuessedWord(this.secretWord);
     print("The secret word has " + this.secretWord.length() + " letters.\n");
     this.guessedWord = new GuessedWord(this.secretWord);

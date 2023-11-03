@@ -12,7 +12,7 @@ export default class Player {
   score;
 
   constructor(name) {
-    score = 0;
+    this.score = 0;
     this.name = name;
   }
 
