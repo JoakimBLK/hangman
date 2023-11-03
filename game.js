@@ -89,6 +89,7 @@ export default class Game {
       print("Congratulations, you barely survived this time: \n");
       print("The word was: " + this.guessedWord.secretWordAsText + ".");
       this.score = this.calculateScore(this.turnNbr);
+      this.player.setScore(this.score);
       print("\nYour score is: " + this.score + ".\n");
 
     } else {
