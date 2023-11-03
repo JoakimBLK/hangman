@@ -53,12 +53,15 @@ export default class FileHandler {
 
     for (let player of savedPlayers) {
       player = player.split(',');
-      this.players.push(new Player(user[0], user[1]));
+      let txtName = player[0];
+      let iScore = parseInt(player[1]);
+      this.players.push(new Player(txtName, iScore));
     }
 
-    console.log(users);
+    console.log(players);
 
     return this.players;
 
   }
+
 }

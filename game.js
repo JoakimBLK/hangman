@@ -5,6 +5,7 @@ import Gallows from "./gallows.js";
 import Question from "./question.js";
 import Word from "./word.js";
 import Player from "./player.js";
+import FilHandler from "./filehandler.js";
 
 
 import PromptSync from 'prompt-sync';
@@ -24,6 +25,7 @@ export default class Game {
   score;
   word;
   player;
+  fileHandler;
 
   constructor() {
 
@@ -35,6 +37,8 @@ export default class Game {
 
     this.score = 0;
     this.turnNbr = 0;
+    this.fileHandler = new FileHandler();
+    this.fileHandler
     print("Welcome to hangman!");
     let nameQuestion = new Question("What is your name: ");
     this.player = new Player(nameQuestion.answer);

@@ -9,11 +9,11 @@ const print = console.log;
 export default class Player {
 
   name;
-  score;
+  score = 0;
 
-  constructor(name) {
-    this.score = 0;
+  constructor(name, score) {
     this.name = name;
+    this.score = score;
   }
 
   setName(name) {
