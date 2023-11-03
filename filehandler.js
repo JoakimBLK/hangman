@@ -7,6 +7,10 @@ const print = console.log;
 
 import { appendFileSync, readFileSync } from 'node:fs';
 
+import Word from "./word.js";
+import Player from "./player.js";
+
+
 
 export default class FileHandler {
 
@@ -49,8 +53,6 @@ export default class FileHandler {
     savedPlayers = savedPlayers.trim();
     savedPlayers = savedPlayers.split('\r\n');
 
-
-
     for (let player of savedPlayers) {
       player = player.split(',');
       let txtName = player[0];
@@ -58,7 +60,7 @@ export default class FileHandler {
       this.players.push(new Player(txtName, iScore));
     }
 
-    console.log(players);
+    console.log(this.players);
 
     return this.players;
 
