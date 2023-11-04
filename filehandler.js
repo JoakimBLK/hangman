@@ -54,7 +54,36 @@ export default class FileHandler {
   }
 
   addWordToWordList(word1) {
-    this.words.push(word1);
+
+    if (!this.isWordInList(word1)) {
+      this.words.push(word1);
+    }
+
+  }
+
+  isWordInList(word1) {
+
+    bIsInList = false;
+    let n1 = words.length;
+
+    if (n1 < 1) {
+      return bIsInList;
+    }
+
+    for (let i = 0; i < n1; i++) {
+
+      let strTextA = word1.txtWord.toLowerCase();
+      let strTextB = words[i].txtWord.toLowerCase();
+
+      if (strTextA == strTextB) {
+        bIsInList = true;
+        return bIsInList;
+      }
+
+    }
+
+    return bIsInList;
+
   }
 
   sortHighScores() {

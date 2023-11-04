@@ -40,7 +40,7 @@ export default class Game {
     this.turnNbr = 0;
 
     this.checkOldGamesAndResults();
- 
+
     print("Welcome to hangman!");
     let nameQuestion = new Question("What is your name: ");
     this.player = new Player(nameQuestion.answer);
@@ -62,16 +62,16 @@ export default class Game {
     this.arrayHandler = new ArrayHandler();
     let bOverWriteList = false;
     let bOverWriteFile = true;
-    
+
     let highscores = this.fileHandler.getHighScoresFromFile(bOverWriteList);
     highscores = this.arrayHandler.sortHighScoresDesc(highscores);
+    print("Earlier highscores:");
     print(highscores);
-    this.fileHandler.writeHighScoresToFile(bOverWriteFile);
 
     let words = this.fileHandler.getWordsFromFile(bOverWriteList);
     words = this.arrayHandler.sortWords(words);
+    print("Earlier words that have been used:");
     print(words);
-    this.fileHandler.writeWordsToFile(bOverWriteFile);
 
   }
 
@@ -115,6 +115,10 @@ export default class Game {
       print("The word was: " + this.guessedWord.secretWordAsText + ".");
       this.score = this.calculateScore(this.turnNbr);
       this.player.setScore(this.score);
+      this.fileHandler.addPlayerToHighScoreList(this.player);
+      let bOverWriteFile = true;
+      this.fileHandler.sortHighScores();
+      this.fileHandler.writeHighScoresToFile(bOverWriteFile);
       print("\nYour score is: " + this.score + ".\n");
 
     } else {
