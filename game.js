@@ -6,7 +6,7 @@ import Question from "./question.js";
 import Word from "./word.js";
 import Player from "./player.js";
 import FileHandler from "./filehandler.js";
-
+import ArrayHandler from "./arrayhandler.js";
 
 import PromptSync from 'prompt-sync';
 
@@ -26,6 +26,7 @@ export default class Game {
   word;
   player;
   fileHandler;
+  arrayHandler;
 
   constructor() {
 
@@ -39,13 +40,16 @@ export default class Game {
     this.turnNbr = 0;
 
     this.fileHandler = new FileHandler();
+    this.arrayHandler = new ArrayHandler();
     let bOverWriteList = false;
     let bOverWriteFile = true;
     let highscores = this.fileHandler.getHighScoresFromFile(bOverWriteList);
+    highscores = this.arrayHandler.sortHighScoresDesc(highscores);
     print(highscores);
     this.fileHandler.writeHighScoresToFile(bOverWriteFile);
 
     let words = this.fileHandler.getWordsFromFile(bOverWriteList);
+    words = this.arrayHandler.sortWords(words);
     print(words);
     this.fileHandler.writeWordsToFile(bOverWriteFile);
 
