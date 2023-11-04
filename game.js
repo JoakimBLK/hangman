@@ -39,8 +39,10 @@ export default class Game {
     this.turnNbr = 0;
     this.fileHandler = new FileHandler();
     let bOverWrite = false;
+    let bOverWriteFile = true;
     let highscores = this.fileHandler.getHighScoresFromFile(bOverWrite);
     print(highscores);
+    this.fileHandler.writeHighScoresToFile(bOverWriteFile);
 
     let words = this.fileHandler.getWordsFromFile(bOverWrite);
     print(words);

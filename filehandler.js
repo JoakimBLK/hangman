@@ -23,10 +23,12 @@ export default class FileHandler {
   words = [];
 
   constructor() {
+
     this.txtFileWord = "data/words.csv";
     this.txtFileHighScore = "data/highscores.csv";
     this.txtFileWordDefault = "data/words_copy.csv";
     this.txtFileHighScoreDefault = "data/highscores_copy.csv";
+
   }
 
   setFileNameWord(txtWord) {
@@ -113,6 +115,40 @@ export default class FileHandler {
     }
 
     return this.words;
+
+  }
+
+  writeHighScoresToFile(bOverWrite) {
+
+    let txtPlayers = "";
+
+    let fileName = this.txtFileHighScore;
+
+    let n1 = this.players.length;
+
+    // If no players do not write anything.
+    if (n1 < 1) {
+      return;
+    }
+
+    for (let i = 0; i < n1; i++) {
+      txtPlayers = txtPlayers + this.players[i].asStringForFile();
+    }
+
+    try {
+
+      // Overwrite file.
+      if (bOverWrite) {
+        appendFileSync(fileName, txtPlayers, { flag: 'w+' }, "utf8");
+      }
+      // Append to file.
+      else {
+        appendFileSync(fileName, txtPlayers, "utf8");
+      }
+
+    } catch (err) {
+      console.error(err);
+    }
 
   }
 

@@ -35,7 +35,7 @@ export default class Player {
   asStringForFile() {
 
     let strText = "";
-    strText = strText + this.getName() + "," + this.getScore() + "\r\n";
+    strText = strText + this.getName() + ", " + this.getScore() + "\r\n";
     return strText;
 
   }
