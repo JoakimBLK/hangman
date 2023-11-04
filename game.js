@@ -48,6 +48,12 @@ export default class Game {
     this.question = new Question("Type in the secret word: ");
     this.secretWord = new SecretWord(this.question.answer);
     this.word = new Word(this.question.answer);
+
+    this.fileHandler.addWordToWordList(this.word);
+    this.fileHandler.sortWords();
+    let bOverWriteFile = true;
+    this.fileHandler.writeWordsToFile(bOverWriteFile);
+
     this.guessedWord = new GuessedWord(this.secretWord);
     print("The secret word has " + this.secretWord.length() + " letters.\n");
     this.guessedWord = new GuessedWord(this.secretWord);
@@ -60,17 +66,37 @@ export default class Game {
 
     this.fileHandler = new FileHandler();
     this.arrayHandler = new ArrayHandler();
-    let bOverWriteList = false;
+    let bOverWriteList = true;
     let bOverWriteFile = true;
+    let bDefaultFile = false;
+    let answer = "";
 
+    // Reset highscores from initial file (if you want to do so).
+    answer = prompt("Do you want to reset highscores (yes or no)? ");
+    if (answer.charAt(0).toLowerCase() == "y") {
+      bDefaultFile = true;
+      this.fileHandler.getHighScoresFromFile(bOverWriteList, bDefaultFile);
+      this.fileHandler.writeHighScoresToFile(bOverWriteFile);
+    }
+
+    // Reset words from initial file (if you want to do so).
+    answer = prompt("Do you want to reset word list (yes or no)? ");
+    if (answer.charAt(0).toLowerCase() == "y") {
+      bDefaultFile = true;
+      this.fileHandler.getWordsFromFile(bOverWriteList, bDefaultFile);
+      this.fileHandler.writeWordsToFile(bOverWriteFile);
+    }
+
+    // Get old highscores from file.
     let highscores = this.fileHandler.getHighScoresFromFile(bOverWriteList);
-    highscores = this.arrayHandler.sortHighScoresDesc(highscores);
+    // highscores = this.arrayHandler.sortHighScoresDesc(highscores);
     print("Earlier highscores:");
     print(highscores);
 
+    // Get old words from file.
     let words = this.fileHandler.getWordsFromFile(bOverWriteList);
-    words = this.arrayHandler.sortWords(words);
-    print("Earlier words that have been used:");
+    // words = this.arrayHandler.sortWords(words);
+    print("\nEarlier words that have been used:");
     print(words);
 
   }
@@ -115,11 +141,13 @@ export default class Game {
       print("The word was: " + this.guessedWord.secretWordAsText + ".");
       this.score = this.calculateScore(this.turnNbr);
       this.player.setScore(this.score);
+      print("\nYour score is: " + this.score + ".\n");
+
+      // Add player to highscore list in file.
       this.fileHandler.addPlayerToHighScoreList(this.player);
       let bOverWriteFile = true;
       this.fileHandler.sortHighScores();
       this.fileHandler.writeHighScoresToFile(bOverWriteFile);
-      print("\nYour score is: " + this.score + ".\n");
 
     } else {
 

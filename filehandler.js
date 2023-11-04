@@ -63,8 +63,8 @@ export default class FileHandler {
 
   isWordInList(word1) {
 
-    bIsInList = false;
-    let n1 = words.length;
+    let bIsInList = false;
+    let n1 = this.words.length;
 
     if (n1 < 1) {
       return bIsInList;
@@ -73,7 +73,7 @@ export default class FileHandler {
     for (let i = 0; i < n1; i++) {
 
       let strTextA = word1.txtWord.toLowerCase();
-      let strTextB = words[i].txtWord.toLowerCase();
+      let strTextB = this.words[i].txtWord.toLowerCase();
 
       if (strTextA == strTextB) {
         bIsInList = true;
