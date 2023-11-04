@@ -13,7 +13,7 @@ export default class Question {
   constructor(questionText) {
 
     this.questionText = questionText;
-    this.answer = prompt(questionText).toLowerCase();
+    this.answer = prompt(questionText);
 
   }
 

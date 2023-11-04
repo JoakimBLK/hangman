@@ -49,8 +49,10 @@ export default class Game {
     this.secretWord = new SecretWord(this.question.answer);
     this.word = new Word(this.question.answer);
 
+    // Add a word to word list and save to file.
     this.fileHandler.addWordToWordList(this.word);
     this.fileHandler.sortWords();
+    this.arrayHandler.copyAndSaveWordsList(this.fileHandler.words);
     let bOverWriteFile = true;
     this.fileHandler.writeWordsToFile(bOverWriteFile);
 
@@ -89,13 +91,13 @@ export default class Game {
 
     // Get old highscores from file.
     let highscores = this.fileHandler.getHighScoresFromFile(bOverWriteList);
-    // highscores = this.arrayHandler.sortHighScoresDesc(highscores);
+    highscores = this.arrayHandler.sortHighScoresDesc(highscores);
     print("Earlier highscores:");
     print(highscores);
 
     // Get old words from file.
     let words = this.fileHandler.getWordsFromFile(bOverWriteList);
-    // words = this.arrayHandler.sortWords(words);
+    words = this.arrayHandler.sortWords(words);
     print("\nEarlier words that have been used:");
     print(words);
 
@@ -106,6 +108,10 @@ export default class Game {
     this.turnNbr++;
     let newQuestion = new Question("Guess a letter: ");
     let letter = newQuestion.answer;
+    let bLetterAlreadyGuessed = false;
+
+    // Check if letter already guessed before the new letter.
+    bLetterAlreadyGuessed = this.guessedWord.isLetterAlreadyGuessed(letter);
 
     print("You guessed: " + letter + ".");
 
@@ -117,7 +123,8 @@ export default class Game {
     print("\n" + this.guessedWord.getCodedWordAsText() + "\n");
     print("You are at turn number: " + this.turnNbr + ".\n");
 
-    if (this.secretWord.isLetterInSecretWord(letter)) {
+    if (this.secretWord.isLetterInSecretWord(letter) &&
+      !bLetterAlreadyGuessed) {
 
       print("\nYou found: \n" + this.guessedWord.getCodedWordAsText() + "\n");
 
@@ -147,6 +154,7 @@ export default class Game {
       this.fileHandler.addPlayerToHighScoreList(this.player);
       let bOverWriteFile = true;
       this.fileHandler.sortHighScores();
+      this.arrayHandler.copyAndSavePlayersList(this.fileHandler.players);
       this.fileHandler.writeHighScoresToFile(bOverWriteFile);
 
     } else {

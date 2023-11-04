@@ -50,6 +50,38 @@ export default class ArrayHandler {
 
   }
 
+  copyAndSavePlayersList(players1) {
+
+    let n1 = players1.length;
+
+    if (n1 < 1) {
+      return players1;
+    }
+
+    for (let i = 0; i < n1; i++) {
+      this.players[i] = players1[i];
+    }
+
+    return this.players;
+
+  }
+
+  copyAndSaveWordsList(words1) {
+
+    let n1 = words1.length;
+
+    if (n1 < 1) {
+      return words1;
+    }
+
+    for (let i = 0; i < n1; i++) {
+      this.words[i] = words1[i];
+    }
+
+    return this.words;
+
+  }
+
   compareHighScores(player1, player2) {
 
     let scoreA = player1.score;
