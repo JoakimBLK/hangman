@@ -9,7 +9,7 @@ import { appendFileSync, readFileSync } from 'node:fs';
 
 import Word from "./word.js";
 import Player from "./player.js";
-
+import ArrayHandler from "./arrayhandler.js";
 
 
 export default class FileHandler {
@@ -18,6 +18,7 @@ export default class FileHandler {
   txtFileHighScore;
   txtHighScoreDefault;
   txtFileWordDefault;
+  arrayHandler;
 
   players = [];
   words = [];
@@ -28,6 +29,7 @@ export default class FileHandler {
     this.txtFileHighScore = "data/highscores.csv";
     this.txtFileWordDefault = "data/words_copy.csv";
     this.txtFileHighScoreDefault = "data/highscores_copy.csv";
+    this.arrayHandler = new ArrayHandler();
 
   }
 
@@ -45,6 +47,14 @@ export default class FileHandler {
 
   getFileNameHighScore() {
     return this.txtFileHighScore;
+  }
+
+  addPlayerToHighScoreList(player1) {
+    this.players.push(player1);
+  }
+
+  addWordToWordList(word1) {
+    this.words.push(word1);
   }
 
   getHighScoresFromFile(bOverWriteList, bDefaultFile) {

@@ -39,20 +39,8 @@ export default class Game {
     this.score = 0;
     this.turnNbr = 0;
 
-    this.fileHandler = new FileHandler();
-    this.arrayHandler = new ArrayHandler();
-    let bOverWriteList = false;
-    let bOverWriteFile = true;
-    let highscores = this.fileHandler.getHighScoresFromFile(bOverWriteList);
-    highscores = this.arrayHandler.sortHighScoresDesc(highscores);
-    print(highscores);
-    this.fileHandler.writeHighScoresToFile(bOverWriteFile);
-
-    let words = this.fileHandler.getWordsFromFile(bOverWriteList);
-    words = this.arrayHandler.sortWords(words);
-    print(words);
-    this.fileHandler.writeWordsToFile(bOverWriteFile);
-
+    this.checkOldGamesAndResults();
+ 
     print("Welcome to hangman!");
     let nameQuestion = new Question("What is your name: ");
     this.player = new Player(nameQuestion.answer);
@@ -65,6 +53,25 @@ export default class Game {
     this.guessedWord = new GuessedWord(this.secretWord);
     print(this.guessedWord.getCodedWordAsText() + "\n");
     this.guessWord();
+
+  }
+
+  checkOldGamesAndResults() {
+
+    this.fileHandler = new FileHandler();
+    this.arrayHandler = new ArrayHandler();
+    let bOverWriteList = false;
+    let bOverWriteFile = true;
+    
+    let highscores = this.fileHandler.getHighScoresFromFile(bOverWriteList);
+    highscores = this.arrayHandler.sortHighScoresDesc(highscores);
+    print(highscores);
+    this.fileHandler.writeHighScoresToFile(bOverWriteFile);
+
+    let words = this.fileHandler.getWordsFromFile(bOverWriteList);
+    words = this.arrayHandler.sortWords(words);
+    print(words);
+    this.fileHandler.writeWordsToFile(bOverWriteFile);
 
   }
 
