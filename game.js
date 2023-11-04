@@ -37,6 +37,7 @@ export default class Game {
 
     this.score = 0;
     this.turnNbr = 0;
+
     this.fileHandler = new FileHandler();
     let bOverWriteList = false;
     let bOverWriteFile = true;
@@ -46,6 +47,7 @@ export default class Game {
 
     let words = this.fileHandler.getWordsFromFile(bOverWriteList);
     print(words);
+    this.fileHandler.writeWordsToFile(bOverWriteFile);
 
     print("Welcome to hangman!");
     let nameQuestion = new Question("What is your name: ");

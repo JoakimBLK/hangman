@@ -152,4 +152,38 @@ export default class FileHandler {
 
   }
 
+  writeWordsToFile(bOverWriteFile) {
+
+    let txtWords = "";
+
+    let fileName = this.txtFileWord;
+
+    let n1 = this.words.length;
+
+    // If no players do not write anything.
+    if (n1 < 1) {
+      return;
+    }
+
+    for (let i = 0; i < n1; i++) {
+      txtWords = txtWords + this.words[i].asStringForFile();
+    }
+
+    try {
+
+      // Overwrite file.
+      if (bOverWriteFile) {
+        appendFileSync(fileName, txtWords, { flag: 'w+' }, "utf8");
+      }
+      // Append to file.
+      else {
+        appendFileSync(fileName, txtWords, "utf8");
+      }
+
+    } catch (err) {
+      console.error(err);
+    }
+
+  }
+
 }
