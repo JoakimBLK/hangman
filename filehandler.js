@@ -57,6 +57,22 @@ export default class FileHandler {
     this.words.push(word1);
   }
 
+  sortHighScores() {
+
+    this.players = this.arrayHandler.sortHighScoresDesc(this.players);
+
+    return this.players;
+
+  }
+
+  sortWords() {
+
+    this.words = this.arrayHandler.sortWords(this.words);
+
+    return this.words;
+
+  }
+
   getHighScoresFromFile(bOverWriteList, bDefaultFile) {
 
     let savedPlayers = [];
