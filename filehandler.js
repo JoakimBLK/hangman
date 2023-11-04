@@ -47,7 +47,7 @@ export default class FileHandler {
     return this.txtFileHighScore;
   }
 
-  getHighScoresFromFile(bOverWrite, bDefaultFile) {
+  getHighScoresFromFile(bOverWriteList, bDefaultFile) {
 
     let savedPlayers = [];
 
@@ -68,7 +68,7 @@ export default class FileHandler {
 
     // Check if we want to empty the list,
     // before reading data from the file.
-    if (bOverWrite) {
+    if (bOverWriteList) {
       this.players = [];
     }
 
@@ -83,7 +83,7 @@ export default class FileHandler {
 
   }
 
-  getWordsFromFile(bOverWrite, bDefaultFile) {
+  getWordsFromFile(bOverWriteList, bDefaultFile) {
 
     let savedWords = [];
 
@@ -105,7 +105,7 @@ export default class FileHandler {
 
     // Check if we want to empty the list,
     // before reading data from the file.
-    if (bOverWrite) {
+    if (bOverWriteList) {
       this.words = [];
     }
 
@@ -118,7 +118,7 @@ export default class FileHandler {
 
   }
 
-  writeHighScoresToFile(bOverWrite) {
+  writeHighScoresToFile(bOverWriteFile) {
 
     let txtPlayers = "";
 
@@ -138,7 +138,7 @@ export default class FileHandler {
     try {
 
       // Overwrite file.
-      if (bOverWrite) {
+      if (bOverWriteFile) {
         appendFileSync(fileName, txtPlayers, { flag: 'w+' }, "utf8");
       }
       // Append to file.

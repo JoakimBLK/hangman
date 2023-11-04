@@ -38,13 +38,13 @@ export default class Game {
     this.score = 0;
     this.turnNbr = 0;
     this.fileHandler = new FileHandler();
-    let bOverWrite = false;
+    let bOverWriteList = false;
     let bOverWriteFile = true;
-    let highscores = this.fileHandler.getHighScoresFromFile(bOverWrite);
+    let highscores = this.fileHandler.getHighScoresFromFile(bOverWriteList);
     print(highscores);
     this.fileHandler.writeHighScoresToFile(bOverWriteFile);
 
-    let words = this.fileHandler.getWordsFromFile(bOverWrite);
+    let words = this.fileHandler.getWordsFromFile(bOverWriteList);
     print(words);
 
     print("Welcome to hangman!");
