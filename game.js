@@ -41,6 +41,10 @@ export default class Game {
     let bOverWrite = false;
     let highscores = this.fileHandler.getHighScoresFromFile(bOverWrite);
     print(highscores);
+
+    let words = this.fileHandler.getWordsFromFile(bOverWrite);
+    print(words);
+
     print("Welcome to hangman!");
     let nameQuestion = new Question("What is your name: ");
     this.player = new Player(nameQuestion.answer);

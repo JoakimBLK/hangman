@@ -23,9 +23,9 @@ export default class FileHandler {
   words = [];
 
   constructor() {
-    this.txtFileWord = "data/correctwords.csv";
+    this.txtFileWord = "data/words.csv";
     this.txtFileHighScore = "data/highscores.csv";
-    this.txtFileWordDefault = "data/correctwords_copy.csv";
+    this.txtFileWordDefault = "data/words_copy.csv";
     this.txtFileHighScoreDefault = "data/highscores_copy.csv";
   }
 
@@ -78,6 +78,41 @@ export default class FileHandler {
     }
 
     return this.players;
+
+  }
+
+  getWordsFromFile(bOverWrite, bDefaultFile) {
+
+    let savedWords = [];
+
+    let fileName = this.txtFileWord;
+
+    if (bDefaultFile) {
+      fileName = this.txtFileWordDefault;
+    }
+
+    try {
+
+      savedWords = readFileSync(fileName, "utf-8");
+    } catch (err) {
+      console.error(err);
+    }
+
+    savedWords = savedWords.trim();
+    savedWords = savedWords.split('\r\n');
+
+    // Check if we want to empty the list,
+    // before reading data from the file.
+    if (bOverWrite) {
+      this.words = [];
+    }
+
+    for (let word of savedWords) {
+      let txtWord = word;
+      this.words.push(new Word(txtWord));
+    }
+
+    return this.words;
 
   }
 
