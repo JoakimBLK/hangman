@@ -86,6 +86,37 @@ export default class FileHandler {
 
   }
 
+  createRandomNumber(a, b) {
+
+    let c = 0;
+
+    if (b > a) {
+      c = Math.round(Math.random() * (b - a) + a);
+    }
+    else {
+      c = Math.round(Math.random() * (a - b) + b);
+    }
+
+    return c;
+
+  }
+
+  getRandomWordFromList() {
+
+    let n1 = this.words.length;
+    let word1 = "Yxa";
+
+    if (n1 < 1) {
+      return word1;
+    }
+
+    let index = this.createRandomNumber(0, n1 - 1);
+    word1 = this.words[index].txtWord;
+
+    return word1;
+
+  }
+
   sortHighScores() {
 
     this.players = this.arrayHandler.sortHighScoresDesc(this.players);
