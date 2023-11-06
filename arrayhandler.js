@@ -5,8 +5,6 @@ const prompt = PromptSync({ sigint: true });
 
 const print = console.log;
 
-import { appendFileSync, readFileSync } from 'node:fs';
-
 import Word from "./word.js";
 import Player from "./player.js";
 
