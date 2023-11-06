@@ -39,6 +39,9 @@ export default class Game {
     this.score = 0;
     this.turnNbr = 0;
 
+    // Checks old highscores and secret words from file.
+    // The player can also reset the highscores and words
+    // to their initial values from some old saved files.
     this.checkOldGamesAndResults();
 
     print("Welcome to hangman!");
@@ -117,7 +120,9 @@ export default class Game {
 
     // Use the written secret word or a word from file.
     let answer = "";
+
     answer = prompt("Do you want to use a secret word from file (yes or no)? ");
+
     if (answer.charAt(0).toLowerCase() == "y") {
       this.secretWord = new SecretWord(this.fileHandler.getRandomWordFromList());
     }
