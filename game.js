@@ -50,21 +50,10 @@ export default class Game {
     this.word = new Word(this.question.answer);
 
     // Add a word to word list and save to file.
-    this.fileHandler.addWordToWordList(this.word);
-    this.fileHandler.sortWords();
-    this.arrayHandler.copyAndSaveWordsList(this.fileHandler.words);
-    let bOverWriteFile = true;
-    this.fileHandler.writeWordsToFile(bOverWriteFile);
+    this.addWordToListAndsaveToFile();
 
     // Use the written secret word or a word from file.
-    let answer = "";
-    answer = prompt("Do you want to use a secret word from file (yes or no)? ");
-    if (answer.charAt(0).toLowerCase() == "y") {
-      this.secretWord = new SecretWord(this.fileHandler.getRandomWordFromList());
-    }
-    else {
-      this.secretWord = new SecretWord(this.question.answer);
-    }
+    this.getSecretWordFromTextOrFile();
 
     this.guessedWord = new GuessedWord(this.secretWord);
     print("The secret word has " + this.secretWord.length() + " letters.\n");
@@ -110,6 +99,31 @@ export default class Game {
     words = this.arrayHandler.sortWords(words);
     print("\nEarlier words that have been used:");
     print(words);
+
+  }
+
+  addWordToListAndsaveToFile() {
+
+    // Add a word to word list and save to file.
+    this.fileHandler.addWordToWordList(this.word);
+    this.fileHandler.sortWords();
+    this.arrayHandler.copyAndSaveWordsList(this.fileHandler.words);
+    let bOverWriteFile = true;
+    this.fileHandler.writeWordsToFile(bOverWriteFile);
+
+  }
+
+  getSecretWordFromTextOrFile() {
+
+    // Use the written secret word or a word from file.
+    let answer = "";
+    answer = prompt("Do you want to use a secret word from file (yes or no)? ");
+    if (answer.charAt(0).toLowerCase() == "y") {
+      this.secretWord = new SecretWord(this.fileHandler.getRandomWordFromList());
+    }
+    else {
+      this.secretWord = new SecretWord(this.question.answer);
+    }
 
   }
 
